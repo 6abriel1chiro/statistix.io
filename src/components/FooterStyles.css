@@ -1,0 +1,24 @@
+/* FooterStyles.css */
+
+/* Footer container styles */
+.footer {
+  background-color: #253759; /* Dark blue */
+  color: #b0babf; /* Light gray */
+  padding: 20px;
+  text-align: center;
+}
+
+/* Social links styles */
+.social-links {
+  margin-top: 10px;
+}
+
+.social-links a {
+  color: #466273; /* Medium blue */
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+.social-links a:hover {
+  color: #007bff; /* Bright blue */
+}

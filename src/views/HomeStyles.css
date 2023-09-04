@@ -1,0 +1,62 @@
+/* Home.css */
+
+/* Define the primary color (#253759) as the dominant color */
+:root {
+  --primary-color: #253759;
+}
+
+/* Define the secondary color (#466273) as the secondary color */
+:root {
+  --secondary-color: #466273;
+}
+
+/* Define the accent color (#b0babf) as the accent color */
+:root {
+  --accent-color: #b0babf;
+}
+
+/* Styles for the banner */
+.banner {
+  background-color: var(
+    --secondary-color
+  ); /* Use the secondary color for the banner background */
+  padding: 20px;
+  text-align: center;
+}
+
+.banner h1 {
+  font-size: 24px;
+  color: var(--primary-color); /* Use the primary color for the heading text */
+}
+
+/* Styles for the tools section */
+.tools-section {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  flex-direction: row;
+}
+
+.cards-title {
+  font-family: "Courier New", Courier, monospace;
+}
+
+/* Define styles for tool cards, etc. */
+.card {
+  font-family: "Courier New", Courier, monospace;
+
+  margin: 10px;
+  padding: 20px;
+  border: 1px solid var(--primary-color); /* Use the primary color for the card border */
+  border-radius: 10px; /* Add border radius to the cards */
+  background-color: var(
+    --accent-color
+  ); /* Use the accent color for the card background */
+  transition: transform 0.2s ease; /* Add a smooth transition effect */
+}
+
+.card:hover {
+  transform: scale(
+    1.05
+  ); /* Scale the card slightly on hover for a smooth effect */
+}
