@@ -1,0 +1,14 @@
+/* Define the primary color (#253759) as the dominant color */
+:root {
+  --primary-color: #253759;
+}
+
+/* Define the secondary color (#466273) as the secondary color */
+:root {
+  --secondary-color: #466273;
+}
+
+/* Define the accent color (#b0babf) as the accent color */
+:root {
+  --accent-color: #b0babf;
+}
