@@ -2,13 +2,11 @@
 
 /* Navbar styles */
 .navbar {
-  background-color: var(
-    --primary-color
-  ); /* Use the primary color for the background */
-  padding: 10px 20px; /* Add padding to the navbar */
+  background-color: var(--primary-color);
+  padding: 10px 20px;
   display: flex;
-  justify-content: space-between; /* Align items horizontally */
-  align-items: center; /* Align items vertically */
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* Navbar list styles */
@@ -21,31 +19,50 @@
 
 /* Navbar item styles */
 .navbar-item {
-  margin-right: 20px; /* Add spacing between navbar items */
+  margin-right: 20px;
 }
 
 /* Navbar item link styles */
 .navbar-item a {
-  color: var(--accent-color); /* Use the accent color for links */
+  color: var(--accent-color);
   text-decoration: none;
   font-weight: bold;
-  font-size: 16px; /* Adjust font size as needed */
-  transition: color 0.2s; /* Add a smooth color transition effect */
+  font-size: 16px;
+  transition: color 0.2s;
 }
 
 /* Navbar item link hover styles */
 .navbar-item a:hover {
-  color: white; /* Change link color on hover */
+  color: white;
 }
 
 /* Responsive Navbar */
 @media (max-width: 768px) {
   .navbar {
-    flex-direction: column; /* Stack items vertically */
+    flex-direction: column;
+    align-items: flex-start; /* Align items to the left for mobile */
   }
 
   /* Navbar item styles for mobile */
   .navbar-item {
-    margin-bottom: 10px; /* Add spacing between navbar items on mobile */
+    margin-bottom: 10px;
+  }
+
+  /* Mobile menu icon styles */
+  .mobile-menu-icon {
+    display: block; /* Show the icon on mobile */
+    cursor: pointer;
+  }
+
+  /* Hide the regular navbar list on mobile */
+  .navbar-list {
+    display: none;
+  }
+
+  /* Show the navbar list when the mobile menu icon is clicked */
+  .navbar-mobile-open .navbar-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
