@@ -6,6 +6,9 @@
   color: #b0babf; /* Light gray */
   padding: 20px;
   text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 /* Social links styles */
@@ -20,5 +23,5 @@
 }
 
 .social-links a:hover {
-  color: #007bff; /* Bright blue */
+  color: #bebebe; /* Light gray */
 }
