@@ -69,7 +69,16 @@ export default class LinearRegressionTool extends Component {
           <button onClick={this.splitDataInput}>Split Data</button>
         </div>
         <div className="data-points">
-          {dataPoints.length > 0 && <p>Data Points: {dataPoints.join(", ")}</p>}
+          {dataPoints.length > 0 && (
+            <div>
+              <p>Data Points:</p>
+              <ul>
+                {dataPoints.map((point, index) => (
+                  <li key={index}>{point}</li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
         <button onClick={this.calculateLinearRegression}>Calculate</button>
         <div className="result">
