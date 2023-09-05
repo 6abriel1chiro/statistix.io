@@ -2,10 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import bannerImage from "../assets/img/banner.jpg";
 
 import "./HomeStyles.css";
 
-// Sample data for the available tools
 const toolsData = [
   {
     id: "linear-regression",
@@ -17,6 +17,11 @@ const toolsData = [
     name: "Multi-variable Regression Tool",
     description: "Analyze multi-variable regression.",
   },
+  {
+    id: "moving-averages",
+    name: "Simple Moving Average Tool",
+    description: "Straightforward simple moving average.",
+  },
 ];
 
 const Home: React.FC = () => {
@@ -24,9 +29,9 @@ const Home: React.FC = () => {
     <React.Fragment>
       <Navbar />
       <div className="banner">
-        <h1>Welcome to statistix.io</h1>
+        <img src={bannerImage} alt="Banner" />
       </div>
-      <h2 className="cards-title">Available Tools</h2>
+      <h2 className="tools-title">Available Tools</h2>
       <section className="tools-section">
         <div className="tool-cards">
           {toolsData.map((tool) => (

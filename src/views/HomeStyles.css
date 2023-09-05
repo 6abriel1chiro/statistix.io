@@ -29,29 +29,30 @@
   color: var(--primary-color); /* Use the primary color for the heading text */
 }
 
-/* Styles for the tools section */
 .tools-section {
-  display: flex;
-  flex-wrap: wrap;
   padding: 20px;
-  flex-direction: row;
 }
 
-.cards-title {
-  font-family: "Courier New", Courier, monospace;
+.tools-title {
+  font-size: 28px;
+  color: var(--primary-color);
+  text-align: center;
+  margin-top: 20px;
+}
+.tool-cards {
+  display: flex;
+  flex-wrap: wrap; /* Allow cards to wrap to the next row */
+  gap: 20px; /* Adjust the gap between cards as needed */
 }
 
-/* Define styles for tool cards, etc. */
 .card {
   font-family: "Courier New", Courier, monospace;
-
-  margin: 10px;
+  flex: 0 0 calc(33.33% - 20px); /* Set each card to take up 33.33% of the container width */
+  border: 1px solid #ccc;
   padding: 20px;
-  border: 1px solid var(--primary-color); /* Use the primary color for the card border */
-  border-radius: 10px; /* Add border radius to the cards */
-  background-color: var(
-    --accent-color
-  ); /* Use the accent color for the card background */
+  box-sizing: border-box;
+
+  border-radius: 10px;
   transition: transform 0.2s ease; /* Add a smooth transition effect */
 }
 

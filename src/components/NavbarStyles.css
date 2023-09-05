@@ -1,0 +1,51 @@
+/* NavbarStyles.css */
+
+/* Navbar styles */
+.navbar {
+  background-color: var(
+    --primary-color
+  ); /* Use the primary color for the background */
+  padding: 10px 20px; /* Add padding to the navbar */
+  display: flex;
+  justify-content: space-between; /* Align items horizontally */
+  align-items: center; /* Align items vertically */
+}
+
+/* Navbar list styles */
+.navbar-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  margin: 0;
+}
+
+/* Navbar item styles */
+.navbar-item {
+  margin-right: 20px; /* Add spacing between navbar items */
+}
+
+/* Navbar item link styles */
+.navbar-item a {
+  color: var(--accent-color); /* Use the accent color for links */
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px; /* Adjust font size as needed */
+  transition: color 0.2s; /* Add a smooth color transition effect */
+}
+
+/* Navbar item link hover styles */
+.navbar-item a:hover {
+  color: white; /* Change link color on hover */
+}
+
+/* Responsive Navbar */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column; /* Stack items vertically */
+  }
+
+  /* Navbar item styles for mobile */
+  .navbar-item {
+    margin-bottom: 10px; /* Add spacing between navbar items on mobile */
+  }
+}
