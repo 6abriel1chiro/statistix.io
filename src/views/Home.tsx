@@ -12,9 +12,9 @@ const toolsData = [
     description: "Perform linear regression analysis.",
   },
   {
-    id: "multi-variable-regression",
-    name: "Multi-variable Regression Tool",
-    description: "Analyze multi-variable regression.",
+    id: "descriptive-statistics",
+    name: "Descriptive Statistics Tool",
+    description: "Calculate descriptive statistics",
   },
   {
     id: "moving-averages",
