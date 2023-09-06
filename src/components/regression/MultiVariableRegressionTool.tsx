@@ -1,80 +1,73 @@
-import React, { Component } from "react";
+import  { Component } from "react";
 import "./MultiVariableRegressionTool.css";
 
 export default class MultiVariableRegressionTool extends Component {
   constructor() {
     super();
     this.state = {
-      numVariables: 2, // Number of independent variables (default: 2)
-      dataInput: "", // User input for data
+      numVariables: 2,
+      variableInputs: [],
       dataPoints: [], // Array to store parsed data points
-      formula: "", // Multi-variable regression formula
-      independentVariables: [], // Array to store text inputs for independent variables
+      formula: "",
+      inputErrors: [], // Array to store validation errors
     };
   }
 
-  // Function to handle the number of independent variables change
   handleNumVariablesChange = (event) => {
     const numVariables = parseInt(event.target.value, 10);
     this.setState({ numVariables });
   };
 
-  // Function to handle data input change
-  handleDataInputChange = (event) => {
-    this.setState({ dataInput: event.target.value });
-  };
-
-  // Function to split data input into individual data points
-  splitDataInput = () => {
-    const { dataInput, numVariables } = this.state;
-    // Split data input into rows (each row represents a data point)
-    const rows = dataInput.split("\n");
-    // Parse each row into an array of numbers
-    const dataPoints = rows.map((row) =>
-      row.split(",").map((value) => parseFloat(value))
-    );
-    this.setState({ dataPoints, numVariables });
-  };
-
-  // Function to generate text inputs for independent variables
-  generateIndependentVariablesInputs = () => {
+  generateVariableInputs = () => {
     const { numVariables } = this.state;
-    const independentVariables = Array.from(
-      { length: numVariables },
-      (_, i) => (
-        <div key={i}>
-          <label>Independent Variable {i + 1}:</label>
-          <input type="text" />
-        </div>
-      )
-    );
-    this.setState({ independentVariables });
+    const variableInputs = Array.from({ length: numVariables }, (_, i) => (
+      <div key={i}>
+        <label>Independent Variable {i + 1}:</label>
+        <input
+          type="text"
+          ref={(input) => (this[`variableInput${i}`] = input)}
+        />
+        <button onClick={() => this.splitDataInput(i)}>Split Data</button>
+      </div>
+    ));
+    this.setState({ variableInputs });
   };
 
-  // Function to calculate multi-variable regression
+  splitDataInput = (variableIndex) => {
+    const { variableInputs, dataPoints, inputErrors } = this.state;
+    const inputElement = this[`variableInput${variableIndex}`];
+    const inputData = inputElement.value.trim();
+    const dataPointsForVariable = inputData.split(",").map((value) => parseFloat(value));
+
+    // Basic validation: Check if all entered values are valid numbers
+    const invalidValues = dataPointsForVariable.some((value) => isNaN(value));
+    if (invalidValues) {
+      inputErrors[variableIndex] = "Invalid input. Please enter numeric values.";
+    } else {
+      inputErrors[variableIndex] = ""; // Clear error message if valid
+    }
+
+    dataPoints[variableIndex] = dataPointsForVariable;
+    this.setState({ dataPoints, inputErrors });
+  };
+
   calculateMultiVariableRegression = () => {
-    const { dataPoints } = this.state;
+    const { dataPoints, inputErrors } = this.state;
 
-    // Calculate multi-variable regression here
-    // You can implement the multi-variable regression algorithm of your choice
-
-    // For example, using a simple multi-variable regression formula
-    const coefficients = calculateCoefficients(dataPoints);
-
-    // Generate the multi-variable regression formula
-    const formula = generateFormula(coefficients);
-
-    this.setState({ formula });
+    // Check if there are any validation errors before performing the calculation
+    if (inputErrors.some((error) => error)) {
+      alert("Please fix the input errors before calculating.");
+      return;
+    }
+    
+    const [beta0, beta1] = calculateCoefficients(dataPoints);
+    const coefficients = [beta0, beta1];
+    this.setState({ formula: generateFormula(coefficients) });
+    console.log(this.state);
   };
 
   render() {
-    const {
-      numVariables,
-      dataInput,
-      dataPoints,
-      formula,
-      independentVariables,
-    } = this.state;
+    const { numVariables, variableInputs, formula, dataPoints, inputErrors } = this.state;
 
     return (
       <div className="multi-variable-regression-tool">
@@ -86,30 +79,45 @@ export default class MultiVariableRegressionTool extends Component {
             value={numVariables}
             onChange={this.handleNumVariablesChange}
           />
-          <button onClick={this.generateIndependentVariablesInputs}>OK</button>
+          <button onClick={this.generateVariableInputs}>OK</button>
         </div>
-        {independentVariables.length > 0 && (
-          <div className="independent-variables">{independentVariables}</div>
+        {variableInputs.length > 0 && (
+          <div className="variable-inputs">
+            {variableInputs}
+            <div className="validation-errors">
+              {inputErrors.map((error, index) => (
+                <p key={index} className="error-message">
+                  {error}
+                </p>
+              ))}
+            </div>
+          </div>
         )}
 
-        <div className="data-points">
-          {dataPoints.length > 0 && (
-            <div>
-              <p>Data Points:</p>
-              <table>{/* Display data points in a table format */}</table>
-            </div>
-          )}
-        </div>
-        <button onClick={this.calculateMultiVariableRegression}>
-          Calculate
-        </button>
+        <button onClick={this.calculateMultiVariableRegression}>Calculate</button>
         <div className="result">
           {formula && <p>Multi-Variable Regression Formula: {formula}</p>}
         </div>
+        {dataPoints.length > 0 && (
+          <div className="data-points">
+            <p>Data Points:</p>
+            {dataPoints.map((variables, index) => (
+              <div key={index} className="data-column">
+                <p>Data Column {index + 1}:</p>
+                <ul>
+                  {variables.map((value, i) => (
+                    <li key={i}>{value}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     );
   }
 }
+
 
 // Helper function to calculate coefficients (beta values) and generating the formula
 function calculateCoefficients(dataPoints) {
@@ -119,12 +127,17 @@ function calculateCoefficients(dataPoints) {
   const X = dataPoints.map((variables) => variables.slice(0, -1)); // All columns except the last one
   const Y = dataPoints.map((variables) => variables[variables.length - 1]); // Last column
 
+  console.log("X:", X);
+  console.log("Y:", Y);
+
   // Calculate the means of X and Y
   const meanX = X.map(
     (variables) =>
       variables.reduce((sum, value) => sum + value, 0) / variables.length
   );
   const meanY = Y.reduce((sum, value) => sum + value, 0) / numDataPoints;
+  console.log("meanX:", meanX);
+  console.log("meanY:", meanY);
 
   // Calculate the numerator and denominator for beta values
   let numerator = 0;
@@ -143,6 +156,10 @@ function calculateCoefficients(dataPoints) {
       (sum, xiMinusMeanXj) => sum + xiMinusMeanXj ** 2,
       0
     );
+
+    console.log("xi:", xi);
+    console.log("yi:", yi);
+    console.log("xiMinusMeanX:", xiMinusMeanX);
   }
 
   // Calculate beta values
@@ -151,6 +168,7 @@ function calculateCoefficients(dataPoints) {
 
   return [beta0, beta1];
 }
+
 
 // Helper function to generate the multi-variable regression formula
 function generateFormula(coefficients) {
