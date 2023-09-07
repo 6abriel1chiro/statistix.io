@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 
 interface MovingAveragesState {
   dataInput: string;
@@ -6,29 +6,30 @@ interface MovingAveragesState {
   movingAverage: number[] | null;
 }
 
-class MovingAverages extends Component<null, MovingAveragesState> {
-  constructor(props: null) {
-    super(props);
-    this.state = {
-      dataInput: "", // Store user input data
-      windowSize: 0, // Number of consecutive points to average
-      movingAverage: null, // Store the calculated moving average
-    };
-  }
+const MovingAverages: React.FC = () => {
+  const [state, setState] = useState<MovingAveragesState>({
+    dataInput: "", // Store user input data
+    windowSize: 0, // Number of consecutive points to average
+    movingAverage: null, // Store the calculated moving average
+  });
 
   // Function to handle data input change
-  handleDataInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ dataInput: event.target.value });
+  const handleDataInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setState({ ...state, dataInput: event.target.value });
   };
 
   // Function to handle window size input change
-  handleWindowSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ windowSize: parseInt(event.target.value, 10) });
+  const handleWindowSizeChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setState({ ...state, windowSize: parseInt(event.target.value, 10) });
   };
 
   // Function to calculate the moving average
-  calculateMovingAverage = () => {
-    const { dataInput, windowSize } = this.state;
+  const calculateMovingAverage = () => {
+    const { dataInput, windowSize } = state;
 
     // Split the input data by commas and trim any extra whitespace
     const dataPoints = dataInput
@@ -50,41 +51,37 @@ class MovingAverages extends Component<null, MovingAveragesState> {
       movingAverage.push(sum / windowSize);
     }
 
-    this.setState({ movingAverage });
+    setState({ ...state, movingAverage });
   };
 
-  render() {
-    const { dataInput, windowSize, movingAverage } = this.state;
-
-    return (
+  return (
+    <div>
+      <h2>Moving Averages Tool</h2>
       <div>
-        <h2>Moving Averages Tool</h2>
-        <div>
-          <label>Data Points (Separated by Commas):</label>
-          <input
-            type="text"
-            value={dataInput}
-            onChange={this.handleDataInputChange}
-          />
-        </div>
-        <div>
-          <label>Number of Consecutive Points to Average:</label>
-          <input
-            type="number"
-            value={windowSize}
-            onChange={this.handleWindowSizeChange}
-          />
-        </div>
-        <button onClick={this.calculateMovingAverage}>Calculate</button>
-        {movingAverage !== null && (
-          <div>
-            <h3>Moving Average:</h3>
-            <p>{movingAverage.join(", ")}</p>
-          </div>
-        )}
+        <label>Data Points (Separated by Commas):</label>
+        <input
+          type="text"
+          value={state.dataInput}
+          onChange={handleDataInputChange}
+        />
       </div>
-    );
-  }
-}
+      <div>
+        <label>Number of Consecutive Points to Average:</label>
+        <input
+          type="number"
+          value={state.windowSize}
+          onChange={handleWindowSizeChange}
+        />
+      </div>
+      <button onClick={calculateMovingAverage}>Calculate</button>
+      {state.movingAverage !== null && (
+        <div>
+          <h3>Moving Average:</h3>
+          <p>{state.movingAverage.join(", ")}</p>
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default MovingAverages;

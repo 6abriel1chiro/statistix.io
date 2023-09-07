@@ -1,37 +1,32 @@
-import React, { Component, ChangeEvent } from "react";
+import React, { useState, ChangeEvent } from "react";
 import "./LinearRegressionTool.css";
 
-interface LinearRegressionToolState {
-  dataInput: string;
-  dataPoints: number[];
-  formula: string;
-}
+const LinearRegressionTool: React.FC = () => {
+  const [state, setState] = useState<{
+    dataInput: string;
+    dataPoints: number[];
+    formula: string;
+  }>({
+    dataInput: "",
+    dataPoints: [],
+    formula: "",
+  });
 
-export default class LinearRegressionTool extends Component<
-  null,
-  LinearRegressionToolState
-> {
-  constructor(props: null) {
-    super(props);
-    this.state = {
-      dataInput: "",
-      dataPoints: [],
-      formula: "",
-    };
-  }
   // Function to handle data input change
-  handleDataInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    this.setState({ dataInput: event.target.value });
+  const handleDataInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setState({ ...state, dataInput: event.target.value });
   };
-  splitDataInput = () => {
-    const { dataInput } = this.state;
+
+  // Function to split data input into individual data points
+  const splitDataInput = () => {
+    const { dataInput } = state;
     const dataPoints = dataInput.split(",").map((point) => parseFloat(point));
-    this.setState({ dataPoints });
+    setState({ ...state, dataPoints });
   };
 
   // Function to calculate linear regression
-  calculateLinearRegression = () => {
-    const { dataPoints } = this.state;
+  const calculateLinearRegression = () => {
+    const { dataPoints } = state;
 
     // Calculate linear regression here
     // You can implement the linear regression algorithm of your choice
@@ -56,41 +51,39 @@ export default class LinearRegressionTool extends Component<
     // Generate the linear regression formula
     const formula = `y = ${slope.toFixed(2)}x + ${intercept.toFixed(2)}`;
 
-    this.setState({ formula });
+    setState({ ...state, formula });
   };
 
-  render() {
-    const { dataInput, dataPoints, formula } = this.state;
-
-    return (
-      <div className="linear-regression-tool">
-        <h2>Linear Regression Tool</h2>
-        <div className="data-input">
-          <label>Enter Data Separated by Commas:</label>
-          <input
-            type="text"
-            value={dataInput}
-            onChange={this.handleDataInputChange}
-          />
-          <button onClick={this.splitDataInput}>Split Data</button>
-        </div>
-        <div className="data-points">
-          {dataPoints.length > 0 && (
-            <div>
-              <p>Data Points:</p>
-              <ul>
-                {dataPoints.map((point, index) => (
-                  <li key={index}>{point}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
-        <button onClick={this.calculateLinearRegression}>Calculate</button>
-        <div className="result">
-          {formula && <p>Linear Regression Formula: {formula}</p>}
-        </div>
+  return (
+    <div className="linear-regression-tool">
+      <h2>Linear Regression Tool</h2>
+      <div className="data-input">
+        <label>Enter Data Separated by Commas:</label>
+        <input
+          type="text"
+          value={state.dataInput}
+          onChange={handleDataInputChange}
+        />
+        <button onClick={splitDataInput}>Split Data</button>
       </div>
-    );
-  }
-}
+      <div className="data-points">
+        {state.dataPoints.length > 0 && (
+          <div>
+            <p>Data Points:</p>
+            <ul>
+              {state.dataPoints.map((point, index) => (
+                <li key={index}>{point}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+      <button onClick={calculateLinearRegression}>Calculate</button>
+      {state.formula && (
+        <div className="result">Linear Regression Formula: {state.formula}</div>
+      )}
+    </div>
+  );
+};
+
+export default LinearRegressionTool;
