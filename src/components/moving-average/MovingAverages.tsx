@@ -1,22 +1,28 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-class MovingAverages extends Component {
-  constructor() {
-    super();
+interface MovingAveragesState {
+  dataInput: string;
+  windowSize: number;
+  movingAverage: number[] | null;
+}
+
+class MovingAverages extends Component<null, MovingAveragesState> {
+  constructor(props: null) {
+    super(props);
     this.state = {
-      dataInput: '', // Store user input data
+      dataInput: "", // Store user input data
       windowSize: 0, // Number of consecutive points to average
       movingAverage: null, // Store the calculated moving average
     };
   }
 
   // Function to handle data input change
-  handleDataInputChange = (event) => {
+  handleDataInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ dataInput: event.target.value });
   };
 
   // Function to handle window size input change
-  handleWindowSizeChange = (event) => {
+  handleWindowSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ windowSize: parseInt(event.target.value, 10) });
   };
 
@@ -26,12 +32,12 @@ class MovingAverages extends Component {
 
     // Split the input data by commas and trim any extra whitespace
     const dataPoints = dataInput
-      .split(',')
+      .split(",")
       .map((value) => parseFloat(value.trim())) // Parse values into numbers
       .filter((value) => !isNaN(value)); // Filter out NaN values
 
     if (dataPoints.length < windowSize) {
-      alert('Window size cannot be greater than the number of data points.');
+      alert("Window size cannot be greater than the number of data points.");
       return;
     }
 
@@ -73,7 +79,7 @@ class MovingAverages extends Component {
         {movingAverage !== null && (
           <div>
             <h3>Moving Average:</h3>
-            <p>{movingAverage.join(', ')}</p>
+            <p>{movingAverage.join(", ")}</p>
           </div>
         )}
       </div>
