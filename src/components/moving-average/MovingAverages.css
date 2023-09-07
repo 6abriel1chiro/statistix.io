@@ -8,3 +8,13 @@
   margin: 20px auto;
   max-width: 600px;
 }
+.data-input,
+.window-size-input {
+  
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid var(--accent-color);
+  border-radius: 5px;
+  background-color: transparent;
+  color: var(--accent-color);
+}
