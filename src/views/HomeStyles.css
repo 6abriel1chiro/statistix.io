@@ -32,7 +32,6 @@
 }
 
 .card {
-  font-family: "Courier New", Courier, monospace;
   flex: 0 0 calc(33.33% - 20px); /* Set each card to take up 33.33% of the container width */
   border: 1px solid #ccc;
   padding: 20px;
