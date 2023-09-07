@@ -1,5 +1,7 @@
 import React, { useState, ChangeEvent } from "react";
 import "./LinearRegressionTool.css";
+import Navbar from "../navbar/Navbar";
+import Footer from "../footer/Footer";
 
 const LinearRegressionTool: React.FC = () => {
   const [state, setState] = useState<{
@@ -55,6 +57,8 @@ const LinearRegressionTool: React.FC = () => {
   };
 
   return (
+    <React.Fragment>
+      <Navbar/>
     <div className="linear-regression-tool">
       <h2>Linear Regression Tool</h2>
       <div className="data-input">
@@ -78,11 +82,13 @@ const LinearRegressionTool: React.FC = () => {
           </div>
         )}
       </div>
-      <button onClick={calculateLinearRegression}>Calculate</button>
+      <button className="calculateBtn" onClick={calculateLinearRegression}>Calculate</button>
       {state.formula && (
         <div className="result">Linear Regression Formula: {state.formula}</div>
       )}
     </div>
+    <Footer/>
+    </React.Fragment>
   );
 };
 

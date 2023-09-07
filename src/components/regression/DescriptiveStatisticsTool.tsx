@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./DescriptiveStatisticsToolStyles.css";
+import Navbar from "../navbar/Navbar";
+import Footer from "../footer/Footer";
 
 const DescriptiveStatisticsTool: React.FC = () => {
   const [dataInput, setDataInput] = useState<string>("");
@@ -68,13 +70,15 @@ const DescriptiveStatisticsTool: React.FC = () => {
   };
 
   return (
+    <React.Fragment>
+      <Navbar/>
     <div className="descriptive-statistics-tool">
       <h2>Descriptive Statistics Tool</h2>
       <div className="data-input">
         <label>Enter Data (Separated by Commas):</label>
         <input type="text" value={dataInput} onChange={handleDataInputChange} />
       </div>
-      <button onClick={calculateDescriptiveStatistics}>Calculate</button>
+      <button className="calculateBtn" onClick={calculateDescriptiveStatistics}>Calculate</button>
       <div className="result">
         <h3>Descriptive Statistics:</h3>
         <ul>
@@ -86,6 +90,8 @@ const DescriptiveStatisticsTool: React.FC = () => {
         </ul>
       </div>
     </div>
+    <Footer/>
+    </React.Fragment>
   );
 };
 

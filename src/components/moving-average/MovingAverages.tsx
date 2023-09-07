@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import "./MovingAverages.css"
+
 
 interface MovingAveragesState {
   dataInput: string;
@@ -73,7 +75,7 @@ const MovingAverages: React.FC = () => {
           onChange={handleWindowSizeChange}
         />
       </div>
-      <button onClick={calculateMovingAverage}>Calculate</button>
+      <button className="calculateBtn" onClick={calculateMovingAverage}>Calculate</button>
       {state.movingAverage !== null && (
         <div>
           <h3>Moving Average:</h3>
