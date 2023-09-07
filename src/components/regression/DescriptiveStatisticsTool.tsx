@@ -1,27 +1,37 @@
-import React, { Component } from 'react';
-import './DescriptiveStatisticsToolStyles.css';
+import { Component, ChangeEvent } from "react";
+import "./DescriptiveStatisticsToolStyles.css";
 
-export class DescriptiveStatisticsTool extends Component {
+interface DescriptiveStatisticsToolState {
+  dataInput: string;
+  descriptiveStatistics: Record<string, string | number>;
+}
+
+export class DescriptiveStatisticsTool extends Component<
+  null,
+  DescriptiveStatisticsToolState
+> {
   constructor() {
-    super();
+    super(null);
     this.state = {
-      dataInput: '', // User input for data separated by commas
-      descriptiveStatistics: {}, // Object to store calculated descriptive statistics
+      dataInput: "",
+      descriptiveStatistics: {},
     };
   }
 
   // Function to handle data input change
-  handleDataInputChange = (event) => {
+  handleDataInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     this.setState({ dataInput: event.target.value });
   };
 
   // Function to calculate descriptive statistics
   calculateDescriptiveStatistics = () => {
     const { dataInput } = this.state;
-    const dataPoints = dataInput.split(',').map((value) => parseFloat(value.trim()));
+    const dataPoints = dataInput
+      .split(",")
+      .map((value) => parseFloat(value.trim()));
 
     if (dataPoints.some(isNaN)) {
-      alert('Please enter valid numeric values separated by commas.');
+      alert("Please enter valid numeric values separated by commas.");
       return;
     }
 
@@ -32,9 +42,9 @@ export class DescriptiveStatisticsTool extends Component {
       count % 2 === 0
         ? (sortedDataPoints[count / 2 - 1] + sortedDataPoints[count / 2]) / 2
         : sortedDataPoints[Math.floor(count / 2)];
-    const modeMap = {};
+    const modeMap: Record<string, number> = {};
     let maxCount = 0;
-    let mode = [];
+    let mode: string[] = [];
 
     dataPoints.forEach((value) => {
       if (!modeMap[value]) {
@@ -43,9 +53,9 @@ export class DescriptiveStatisticsTool extends Component {
       modeMap[value]++;
       if (modeMap[value] > maxCount) {
         maxCount = modeMap[value];
-        mode = [value];
+        mode = [value.toString()];
       } else if (modeMap[value] === maxCount) {
-        mode.push(value);
+        mode.push(value.toString());
       }
     });
 
@@ -58,10 +68,10 @@ export class DescriptiveStatisticsTool extends Component {
       Count: count,
       Mean: mean.toFixed(2),
       Median: median.toFixed(2),
-      Mode: mode.join(', '),
+      Mode: mode.join(", "),
       Range: range.toFixed(2),
       Variance: variance.toFixed(2),
-      'Standard Deviation': standardDeviation.toFixed(2),
+      "Standard Deviation": standardDeviation.toFixed(2),
     };
 
     this.setState({ descriptiveStatistics });
