@@ -14,7 +14,7 @@ class Footer extends Component {
             Instagram: @6abriel1chiro
           </a>
           <a
-            href="https://www.linkedin.com/in/gabriel-balderrama-vargas-9524001b5/"
+            href="https://www.linkedin.com/in/gabriel-ichiro/"
             target="_blank"
             rel="noopener noreferrer"
           >
