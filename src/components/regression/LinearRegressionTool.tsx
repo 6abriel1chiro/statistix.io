@@ -1,22 +1,28 @@
-import React, { Component } from "react";
+import React, { Component, ChangeEvent } from "react";
 import "./LinearRegressionTool.css";
 
-export default class LinearRegressionTool extends Component {
-  constructor() {
-    super();
+interface LinearRegressionToolState {
+  dataInput: string;
+  dataPoints: number[];
+  formula: string;
+}
+
+export default class LinearRegressionTool extends Component<
+  null,
+  LinearRegressionToolState
+> {
+  constructor(props: null) {
+    super(props);
     this.state = {
-      dataInput: "", // User input for data separated by commas
-      dataPoints: [], // Array to store parsed data points
-      formula: "", // Linear regression formula to be displayed
+      dataInput: "",
+      dataPoints: [],
+      formula: "",
     };
   }
-
   // Function to handle data input change
-  handleDataInputChange = (event) => {
+  handleDataInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     this.setState({ dataInput: event.target.value });
   };
-
-  // Function to split data input into individual data points
   splitDataInput = () => {
     const { dataInput } = this.state;
     const dataPoints = dataInput.split(",").map((point) => parseFloat(point));
