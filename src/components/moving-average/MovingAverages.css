@@ -1,27 +1,10 @@
-/* MovingAveragesStyles.css */
-
-
-
-
-
-
-
-/* Calculate button styles */
-.calculateBtn {
-  display: block;
-  margin: 20px auto;
-  padding: 10px 20px;
-  font-size: 1rem;
-  background-color: var(--accent-color);
-  color: var(--primary-color);
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.calculateBtn:hover {
-  background-color: var(--primary-color);
+.moving-averages-container {
+  background-color: var(--secondary-color);
   color: var(--accent-color);
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  margin: 20px auto;
+  max-width: 600px;
 }
-
-

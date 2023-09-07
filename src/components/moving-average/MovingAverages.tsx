@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./MovingAverages.css"
+import Navbar from "../navbar/Navbar";
+import Footer from "../footer/Footer";
 
 
 interface MovingAveragesState {
@@ -57,32 +59,43 @@ const MovingAverages: React.FC = () => {
   };
 
   return (
-    <div>
-      <h2>Moving Averages Tool</h2>
-      <div>
+    <React.Fragment>
+      <Navbar/>
+    <div className="moving-averages-container">
+      <h2 className="moving-averages-title">Moving Averages Tool</h2>
+      <div className="input-section">
         <label>Data Points (Separated by Commas):</label>
         <input
+          className="data-input"
           type="text"
           value={state.dataInput}
           onChange={handleDataInputChange}
         />
       </div>
-      <div>
+      <div className="input-section">
         <label>Number of Consecutive Points to Average:</label>
         <input
+          className="window-size-input"
           type="number"
           value={state.windowSize}
           onChange={handleWindowSizeChange}
         />
       </div>
-      <button className="calculateBtn" onClick={calculateMovingAverage}>Calculate</button>
+      <button
+        className="calculateBtn"
+        onClick={calculateMovingAverage}
+      >
+        Calculate
+      </button>
       {state.movingAverage !== null && (
-        <div>
-          <h3>Moving Average:</h3>
+        <div className="result">
+          <h3>Moving Average: </h3>
           <p>{state.movingAverage.join(", ")}</p>
         </div>
       )}
     </div>
+    <Footer/>
+    </React.Fragment>
   );
 };
 
