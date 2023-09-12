@@ -1,0 +1,14 @@
+/* ContactStyles.css */
+
+.contact-info {
+    margin: 20px;
+  }
+  
+  .contact-item {
+    margin-bottom: 10px;
+  }
+  
+  .contact-item i {
+    margin-right: 10px;
+  }
+  

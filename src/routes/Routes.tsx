@@ -4,12 +4,15 @@ import Home from "../views/Home";
 import LinearRegressionTool from "../components/regression/LinearRegressionTool";
 import MovingAverages from "../components/moving-average/MovingAverages";
 import DescriptiveStatisticsTool from "../components/regression/DescriptiveStatisticsTool";
+import Contact from "../views/contact";
 
 const RoutesComponent: React.FC = () => {
   return (
     <Router>
       <Routes>
         <Route path="/statistix.io" element={<Home />} />
+        <Route path="/contact" element={<Contact />} />
+
         <Route
           path="/tools/linear-regression"
           element={<LinearRegressionTool />}
