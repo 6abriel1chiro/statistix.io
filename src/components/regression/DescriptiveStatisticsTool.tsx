@@ -2,12 +2,18 @@ import React, { useState } from "react";
 import "./DescriptiveStatisticsToolStyles.css";
 import Navbar from "../navbar/Navbar";
 import Footer from "../footer/Footer";
+import Plot from "react-plotly.js";
 
 const DescriptiveStatisticsTool: React.FC = () => {
   const [dataInput, setDataInput] = useState<string>("");
   const [descriptiveStatistics, setDescriptiveStatistics] = useState<
     Record<string, string | number>
   >({});
+
+  const [histogramData, setHistogramData] = useState<{
+    x: number[];
+    type: "histogram";
+  } | null>(null);
 
   // Function to handle data input change
   const handleDataInputChange = (
@@ -27,6 +33,10 @@ const DescriptiveStatisticsTool: React.FC = () => {
       return;
     }
 
+    const histogramData = {
+      x: dataPoints,
+      type: "histogram" as const,
+    };
     const count = dataPoints.length;
     const mean = dataPoints.reduce((sum, value) => sum + value, 0) / count;
     const sortedDataPoints = dataPoints.slice().sort((a, b) => a - b);
@@ -65,32 +75,61 @@ const DescriptiveStatisticsTool: React.FC = () => {
       Variance: variance.toFixed(2),
       "Standard Deviation": standardDeviation.toFixed(2),
     };
+    setHistogramData(histogramData);
 
     setDescriptiveStatistics(newDescriptiveStatistics);
   };
 
   return (
     <React.Fragment>
-      <Navbar/>
-    <div className="descriptive-statistics-tool">
-      <h2>Descriptive Statistics Tool</h2>
-      <div className="data-input">
-        <label>Enter Data (Separated by Commas):</label>
-        <input type="text" value={dataInput} onChange={handleDataInputChange} />
+      <Navbar />
+      <div className="descriptive-statistics-tool">
+        <h2>Descriptive Statistics Tool</h2>
+        <div className="data-input">
+          <label>Enter Data (Separated by Commas):</label>
+          <input
+            type="text"
+            value={dataInput}
+            onChange={handleDataInputChange}
+          />
+        </div>
+        <button
+          className="calculateBtn"
+          onClick={calculateDescriptiveStatistics}
+        >
+          Calculate
+        </button>
+        <div className="result">
+          <ul>
+            <li>{"Descriptive Statistics:  "}</li>
+            {Object.entries(descriptiveStatistics).map(([key, value]) => (
+              <li key={key}>
+                <strong>{key}:</strong> {value}
+              </li>
+            ))}
+          </ul>
+          <div className="histogram">
+            {histogramData && (
+              <Plot
+                className="plot"
+                data={[histogramData]}
+                layout={{
+                  title: "Data Distribution Histogram",
+                  xaxis: {
+                    title: "Value",
+                    nticks: 10, // Adjust the number of bins
+                  },
+                  yaxis: { title: "Frequency" },
+                  bargap: 0.05, // Adjust the gap between bars
+                  width: 450, // Specify the width (e.g., 400 pixels)
+                  height: 470, // Specify the height (e.g., 300 pixels)
+                }}
+              />
+            )}
+          </div>
+        </div>
       </div>
-      <button className="calculateBtn" onClick={calculateDescriptiveStatistics}>Calculate</button>
-      <div className="result">
-        <h3>Descriptive Statistics:</h3>
-        <ul>
-          {Object.entries(descriptiveStatistics).map(([key, value]) => (
-            <li key={key}>
-              <strong>{key}:</strong> {value}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-    <Footer/>
+      <Footer />
     </React.Fragment>
   );
 };

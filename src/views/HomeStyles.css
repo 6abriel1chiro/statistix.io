@@ -15,8 +15,9 @@
 }
 
 .tools-section {
+  display: flex;
   padding: 20px;
-  padding-bottom: 120px;
+  height: 100%;
 }
 
 .tools-title {
