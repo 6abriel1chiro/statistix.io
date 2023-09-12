@@ -19,10 +19,12 @@ jobs:
         with:
           node-version: 16
 
+      - name: Clean build artifacts # Add this step to clean the ./dist directory
+        run: rm -rf ./dist
+
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
-      - name: Clean build artifacts
-        run: rm -rf ./dist
+
       - name: Build project
         run: npm run build
 
