@@ -3,7 +3,7 @@ import Navbar from '../components/navbar/Navbar';
 import Footer from '../components/footer/Footer';
 import LinkedInIcon from '../assets/img/linkedin-in.svg';
 import EmailIcon from '../assets/img/envelope-solid.svg';
-import './contactStyles.css';
+import "./ContactStyles.css"
 
 
 const Contact: React.FC = () => {
