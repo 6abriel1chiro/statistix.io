@@ -13,7 +13,7 @@ interface MovingAveragesState {
 const MovingAverages: React.FC = () => {
   const [state, setState] = useState<MovingAveragesState>({
     dataInput: "", // Store user input data
-    windowSize: 0, // Number of consecutive points to average
+    windowSize: 2, // Number of consecutive points to average
     movingAverage: null, // Store the calculated moving average
   });
 
