@@ -6,9 +6,9 @@
   color: #b0babf; /* Light gray */
   padding: 10px;
   text-align: center;
-  position: fixed;
   bottom: 0;
   width: 100%;
+  position: absolute;
 }
 
 /* Social links styles */

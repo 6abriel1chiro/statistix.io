@@ -100,8 +100,8 @@ const DescriptiveStatisticsTool: React.FC = () => {
           Calculate
         </button>
         <div className="result">
-          <h3>Descriptive Statistics:</h3>
           <ul>
+            <li>{"Descriptive Statistics:  "}</li>
             {Object.entries(descriptiveStatistics).map(([key, value]) => (
               <li key={key}>
                 <strong>{key}:</strong> {value}
@@ -111,6 +111,7 @@ const DescriptiveStatisticsTool: React.FC = () => {
           <div className="histogram">
             {histogramData && (
               <Plot
+                className="plot"
                 data={[histogramData]}
                 layout={{
                   title: "Data Distribution Histogram",
@@ -120,6 +121,8 @@ const DescriptiveStatisticsTool: React.FC = () => {
                   },
                   yaxis: { title: "Frequency" },
                   bargap: 0.05, // Adjust the gap between bars
+                  width: 450, // Specify the width (e.g., 400 pixels)
+                  height: 470, // Specify the height (e.g., 300 pixels)
                 }}
               />
             )}
