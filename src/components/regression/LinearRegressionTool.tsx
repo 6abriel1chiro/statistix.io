@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent } from "react";
 import "./LinearRegressionTool.css";
 import Navbar from "../navbar/Navbar";
 import Footer from "../footer/Footer";
+import LinearRegressionGraph from "./LinearRegressionGraph"; // Import the new component
 
 const LinearRegressionTool: React.FC = () => {
   const [state, setState] = useState<{
@@ -30,10 +31,6 @@ const LinearRegressionTool: React.FC = () => {
   const calculateLinearRegression = () => {
     const { dataPoints } = state;
 
-    // Calculate linear regression here
-    // You can implement the linear regression algorithm of your choice
-
-    // For example, using a simple linear regression formula:
     const n = dataPoints.length;
     let sumX = 0;
     let sumY = 0;
@@ -58,36 +55,44 @@ const LinearRegressionTool: React.FC = () => {
 
   return (
     <React.Fragment>
-      <Navbar/>
-    <div className="linear-regression-tool">
-      <h2>Linear Regression Tool</h2>
-      <div className="data-input">
-        <label>Enter Data Separated by Commas:</label>
-        <input
-          type="text"
-          value={state.dataInput}
-          onChange={handleDataInputChange}
-        />
-        <button onClick={splitDataInput}>Split Data</button>
-      </div>
-      <div className="data-points">
-        {state.dataPoints.length > 0 && (
-          <div>
-            <p>Data Points:</p>
-            <ul>
-              {state.dataPoints.map((point, index) => (
-                <li key={index}>{point}</li>
-              ))}
-            </ul>
+      <Navbar />
+      <div className="linear-regression-tool">
+        <h2>Linear Regression Tool</h2>
+        <div className="data-input">
+          <label>Enter Data Separated by Commas:</label>
+          <input
+            type="text"
+            value={state.dataInput}
+            onChange={handleDataInputChange}
+          />
+          <button onClick={splitDataInput}>Split Data</button>
+        </div>
+        <div className="data-points">
+          {state.dataPoints.length > 0 && (
+            <div>
+              <p>Data Points:</p>
+              <ul>
+                {state.dataPoints.map((point, index) => (
+                  <li key={index}>{point}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+        <button className="calculateBtn" onClick={calculateLinearRegression}>
+          Calculate
+        </button>
+        {state.formula && (
+          <div className="result">
+            Linear Regression Formula: {state.formula}
           </div>
         )}
+        <LinearRegressionGraph
+          dataPoints={state.dataPoints}
+          formula={state.formula}
+        />
       </div>
-      <button className="calculateBtn" onClick={calculateLinearRegression}>Calculate</button>
-      {state.formula && (
-        <div className="result">Linear Regression Formula: {state.formula}</div>
-      )}
-    </div>
-    <Footer/>
+      <Footer />
     </React.Fragment>
   );
 };
