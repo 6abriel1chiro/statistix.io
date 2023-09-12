@@ -4,7 +4,7 @@ import Home from "../views/Home";
 import LinearRegressionTool from "../components/regression/LinearRegressionTool";
 import MovingAverages from "../components/moving-average/MovingAverages";
 import DescriptiveStatisticsTool from "../components/regression/DescriptiveStatisticsTool";
-import Contact from "../views/contact";
+import Contact from "../views/Contact"
 
 const RoutesComponent: React.FC = () => {
   return (
