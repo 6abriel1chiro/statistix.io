@@ -64,7 +64,7 @@ const MovingAverages: React.FC = () => {
     <div className="moving-averages-container">
       <h2 className="moving-averages-title">Moving Averages Tool</h2>
       <div className="input-section">
-        <label>Data Points (Separated by Commas):</label>
+        <label>Data Points (Separated by Commas): </label>
         <input
           className="data-input"
           type="text"
@@ -73,7 +73,7 @@ const MovingAverages: React.FC = () => {
         />
       </div>
       <div className="input-section">
-        <label>Number of Consecutive Points to Average:</label>
+        <label>Number of Consecutive Points to Average: </label>
         <input
           className="window-size-input"
           type="number"
@@ -88,9 +88,9 @@ const MovingAverages: React.FC = () => {
         Calculate
       </button>
       {state.movingAverage !== null && (
-        <div className="result">
+        <div>
           <h3>Moving Average: </h3>
-          <p>{state.movingAverage.join(", ")}</p>
+          <p className="result-values">{state.movingAverage.join(", ")}</p>
         </div>
       )}
     </div>

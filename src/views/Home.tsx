@@ -28,7 +28,7 @@ const Home: React.FC = () => {
     <React.Fragment>
       <Navbar />
       <div className="banner">
-        <img src={bannerImage} alt="Banner" />
+      <img className="responsive-image" src={bannerImage} alt="Banner" />
       </div>
       <h2 className="tools-title">Available Tools</h2>
       <section className="tools-section">

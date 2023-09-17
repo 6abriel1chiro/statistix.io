@@ -2,8 +2,8 @@
 
 /* Footer container styles */
 .footer {
-  background-color: #253759; /* Dark blue */
-  color: #b0babf; /* Light gray */
+  background-color: #253759;
+  color: #b0babf;
   padding: 10px;
   text-align: center;
   bottom: 0;
@@ -14,14 +14,40 @@
 /* Social links styles */
 .social-links {
   margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .social-links a {
-  color: #466273; /* Medium blue */
+  color: #466273;
   text-decoration: none;
-  margin: 0 10px;
+  margin: 5px;
 }
 
 .social-links a:hover {
-  color: #bebebe; /* Light gray */
+  color: #bebebe;
 }
+
+/* Media Query for screens smaller than 768px */
+@media (max-width: 768px) {
+  .footer {
+    position: relative; /* Change the position to relative for mobile screens */
+  }
+
+  /* Add some padding to separate the footer from the content */
+  .footer {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  /* Center-align the social links for mobile screens */
+  .social-links {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+
+
+

@@ -1,14 +1,26 @@
 /* ContactStyles.css */
 
+/* Center the contact info section */
 .contact-info {
-    margin: 20px;
-  }
-  
-  .contact-item {
-    margin-bottom: 10px;
-  }
-  
-  .contact-item i {
-    margin-right: 10px;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Style the icons */
+.icon {
+  font-size: 36px; /* Adjust the size as needed */
+  margin-bottom: 10px; /* Add spacing between icons */
+  transition: transform 0.2s ease; /* Add smooth animation on hover */
+}
+
+/* Rotate the icon on hover */
+.icon:hover {
+  transform: rotate(360deg);
+}
+
+
+.contact-item{
+  padding: 20px;
+}

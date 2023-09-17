@@ -1,23 +1,22 @@
-/* Home.css */
+/* HomeStyles.css */
 
 /* Styles for the banner */
 .banner {
-  background-color: var(
-    --secondary-color
-  ); /* Use the secondary color for the banner background */
+  background-color: var(--secondary-color);
   padding: 20px;
   text-align: center;
 }
 
 .banner h1 {
   font-size: 24px;
-  color: var(--primary-color); /* Use the primary color for the heading text */
+  color: var(--primary-color);
 }
 
 .tools-section {
   display: flex;
+  flex-wrap: wrap;
   padding: 20px;
-  height: 100%;
+  justify-content: center; /* Center the tool cards horizontally */
 }
 
 .tools-title {
@@ -26,24 +25,41 @@
   text-align: center;
   margin-top: 20px;
 }
+
 .tool-cards {
   display: flex;
-  flex-wrap: wrap; /* Allow cards to wrap to the next row */
-  gap: 20px; /* Adjust the gap between cards as needed */
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between; /* Space the cards evenly */
 }
 
 .card {
-  flex: 0 0 calc(33.33% - 20px); /* Set each card to take up 33.33% of the container width */
+  flex: 0 0 calc(33.33% - 20px);
   border: 1px solid #ccc;
   padding: 20px;
   box-sizing: border-box;
-
   border-radius: 10px;
-  transition: transform 0.2s ease; /* Add a smooth transition effect */
+  transition: transform 0.2s ease;
 }
 
 .card:hover {
-  transform: scale(
-    1.05
-  ); /* Scale the card slightly on hover for a smooth effect */
+  transform: scale(1.05);
+}
+
+/* Media Query for screens smaller than 768px */
+@media (max-width: 768px) {
+  .tools-section {
+    flex-direction: column; /* Stack the cards vertically on smaller screens */
+    align-items: center; /* Center the cards horizontally on smaller screens */
+  }
+
+  .card {
+    flex: 0 0 calc(100% - 20px); /* Make each card take up 50% of the container width on smaller screens */
+  }
+}
+
+/* Add this to your HomeStyles.css */
+.responsive-image {
+  max-width: 100%; /* Ensure the image doesn't exceed its container width */
+  height: auto; /* Maintain the image's aspect ratio */
 }
