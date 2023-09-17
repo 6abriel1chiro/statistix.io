@@ -1,6 +1,6 @@
 import React from "react";
 import Plot from "react-plotly.js";
-import { Data } from "plotly.js";
+import regression from "regression";
 
 interface LinearRegressionGraphProps {
   dataPoints: number[];
@@ -15,47 +15,56 @@ const LinearRegressionGraph: React.FC<LinearRegressionGraphProps> = ({
   const x = dataPoints.map((_, index) => index + 1);
   const y = dataPoints;
 
-  // Create a function to calculate the predicted y values
-  const calculatePredictedY = (xValue: number) => {
-    const [slope, intercept] = formula.split("x");
-    return parseFloat(slope) * xValue + parseFloat(intercept);
-  };
+  // Check if a valid formula is available
+  if (formula) {
+    // Create an array of data points for regression
+    const regressionData = x.map((xValue, index) => [xValue, y[index]]);
 
-  // Calculate the predicted y values using the function
-  const predictedY = x.map((xValue) => calculatePredictedY(xValue));
+    // Calculate the linear regression line
+    const result = regression.linear(regressionData);
+    const regressionLine = result.points;
 
-  // Create data for the graph
-  const traceData: Data[] = [
-    {
+    // Extract the x and y values for the regression line
+    const regressionX = regressionLine.map((point) => point[0]);
+    const regressionY = regressionLine.map((point) => point[1]);
+
+    // Create data for the graph
+    const scatterPlot = {
       x,
       y,
-      name: "Data Points",
       mode: "markers",
       type: "scatter",
-    },
-    {
-      x,
-      y: predictedY,
-      name: "Trendline",
-      mode: "lines+markers", // Display both lines and markers
-      type: "scatter",
-    },
-  ];
+      name: "Data",
+    };
 
-  return (
-    <React.Fragment>
-      <Plot
-        data={traceData}
-        layout={{
-          title: "Linear Regression Trendline",
-          xaxis: { title: "X" },
-          yaxis: { title: "Y" },
-          width: 400, // Specify the width (e.g., 400 pixels)
-          height: 300, // Specify the height (e.g., 300 pixels)
-        }}
-      />
-    </React.Fragment>
-  );
+    const regressionTrace = {
+      x: regressionX,
+      y: regressionY,
+      mode: "lines",
+      type: "scatter",
+      name: "Linear Regression",
+    };
+
+    // Combine scatter and regression traces
+    const data = [scatterPlot, regressionTrace];
+
+    // Layout for the graph
+    const layout = {
+      title: "Linear Regression Trendline",
+      xaxis: { title: "X" },
+      yaxis: { title: "Y" },
+      width: 400, // Specify the width (e.g., 400 pixels)
+      height: 300, // Specify the height (e.g., 300 pixels)
+    };
+
+    return (
+      <React.Fragment>
+        <Plot data={data} layout={layout} />
+      </React.Fragment>
+    );
+  }
+
+  return null; // If no formula is available, don't render the graph
 };
 
 export default LinearRegressionGraph;
