@@ -16,7 +16,7 @@ const Navbar: React.FC = () => {
       <div className="mobile-menu-icon" onClick={toggleMobileMenu}>
         <i className={`fa ${isMobileMenuOpen ? "fa-times" : "fa-bars"}`}></i>
       </div>
-      
+
       {/* Regular Navbar */}
       <ul className={`navbar-list ${isMobileMenuOpen ? "navbar-mobile-open" : ""}`}>
         <li className="navbar-item">
@@ -26,19 +26,17 @@ const Navbar: React.FC = () => {
           <Link to="/contact">Contact or Support</Link>
         </li>
         {/* dropdown */}
-        <li className="navbar-item">
-          <div className="dropdown">
-            <button className="dropbtn">
-              Tools
-              <i className="fa fa-caret-down"></i>
-            </button>
-            <div className="dropdown-content">
-              <Link to={`/tools/descriptive-statistics`}>
-                Descriptive Stats
-              </Link>
-              <Link to={`/tools/linear-regression`}>Linear Regression</Link>
-              <Link to={`/tools/moving-averages`}>Moving Averages</Link>
-            </div>
+        <li className="navbar-item dropdown"> {/* Add "dropdown" class to the navbar-item */}
+          <button className="dropbtn">
+            Tools
+            <i className="fa fa-caret-down"></i>
+          </button>
+          <div className="dropdown-content">
+            <Link to={`/tools/descriptive-statistics`}>
+              Descriptive Stats
+            </Link>
+            <Link to={`/tools/linear-regression`}>Linear Regression</Link>
+            <Link to={`/tools/moving-averages`}>Moving Averages</Link>
           </div>
         </li>
       </ul>

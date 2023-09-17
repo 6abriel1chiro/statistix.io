@@ -9,7 +9,7 @@
   margin: 0 auto;
 }
 
-h2 {
+.tool-title {
   font-size: 1.5rem;
   margin-bottom: 20px;
   color: var(--primary-color);
