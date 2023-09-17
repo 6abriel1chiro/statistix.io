@@ -1,6 +1,7 @@
 import React from "react";
 import Plot from "react-plotly.js";
 import regression from "regression";
+import { Data } from "plotly.js";
 
 // Define a type alias for DataPoint
 type DataPoint = [number, number];
@@ -35,7 +36,7 @@ const LinearRegressionGraph: React.FC<LinearRegressionGraphProps> = ({
     const regressionY = regressionLine.map((point) => point[1]);
 
     // Create data for the graph
-    const scatterPlot = {
+    const scatterPlot: Data = {
       x,
       y,
       mode: "markers",
@@ -43,7 +44,7 @@ const LinearRegressionGraph: React.FC<LinearRegressionGraphProps> = ({
       name: "Data",
     };
 
-    const regressionTrace = {
+    const regressionTrace: Data = {
       x: regressionX,
       y: regressionY,
       mode: "lines",
@@ -52,7 +53,7 @@ const LinearRegressionGraph: React.FC<LinearRegressionGraphProps> = ({
     };
 
     // Combine scatter and regression traces
-    const data = [scatterPlot, regressionTrace];
+    const data: Data[] = [scatterPlot, regressionTrace];
 
     // Layout for the graph
     const layout = {
