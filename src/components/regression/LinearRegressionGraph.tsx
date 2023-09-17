@@ -2,6 +2,9 @@ import React from "react";
 import Plot from "react-plotly.js";
 import regression from "regression";
 
+// Define a type alias for DataPoint
+type DataPoint = [number, number];
+
 interface LinearRegressionGraphProps {
   dataPoints: number[];
   formula: string;
@@ -18,7 +21,10 @@ const LinearRegressionGraph: React.FC<LinearRegressionGraphProps> = ({
   // Check if a valid formula is available
   if (formula) {
     // Create an array of data points for regression
-    const regressionData = x.map((xValue, index) => [xValue, y[index]]);
+    const regressionData: DataPoint[] = x.map((xValue, index) => [
+      xValue,
+      y[index],
+    ]);
 
     // Calculate the linear regression line
     const result = regression.linear(regressionData);
