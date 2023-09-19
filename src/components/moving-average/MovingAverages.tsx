@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./MovingAverages.css"
 import Navbar from "../navbar/Navbar";
-import Footer from "../footer/Footer";
 
 
 interface MovingAveragesState {
@@ -94,7 +93,7 @@ const MovingAverages: React.FC = () => {
         </div>
       )}
     </div>
-    <Footer/>
+    
     </React.Fragment>
   );
 };

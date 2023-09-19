@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent } from "react";
 import "./LinearRegressionTool.css";
 import Navbar from "../navbar/Navbar";
-import Footer from "../footer/Footer";
+
 import LinearRegressionGraph from "./LinearRegressionGraph"; // Import the new component
 
 const LinearRegressionTool: React.FC = () => {
@@ -93,7 +93,7 @@ const LinearRegressionTool: React.FC = () => {
           />
         )}
       </div>
-      <Footer />
+      
     </React.Fragment>
   );
 };

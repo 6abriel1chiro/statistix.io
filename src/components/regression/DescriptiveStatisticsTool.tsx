@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./DescriptiveStatisticsToolStyles.css";
 import Navbar from "../navbar/Navbar";
-import Footer from "../footer/Footer";
+
 import Plot from "react-plotly.js";
 
 const DescriptiveStatisticsTool: React.FC = () => {
@@ -129,7 +129,7 @@ const DescriptiveStatisticsTool: React.FC = () => {
           </div>
         </div>
       </div>
-      <Footer />
+    
     </React.Fragment>
   );
 };
